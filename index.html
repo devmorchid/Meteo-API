@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HitRadio - Météo</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  
+</head>
+<body>
+ 
+  <div>
+     <header >
+    
+    <img  style="width: 50px;" src="img/logo_ht.png" alt="">
+    <h1> HitRadio - Météo en direct</h1>
+    
+  </header>
+  </div>
+  <main>
+    <div class="search-bar">
+      <input type="text" id="cityInput" placeholder="Entrez une ville...">
+      <button id="searchBtn">Rechercher</button>
+    </div>
+
+    <div class="weather-info" id="currentWeather">
+      <h2>Météo actuelle</h2>
+      <div class="dv_actuelle">
+        <div class="dv_VTD"><p >Ville <br><br>  <span id="cityName">-</span></p></div>
+        <div class="dv_VTD"><p>Température <br> <br>  <span id="temperature">-</span> °C</p></div>
+        <div class="dv_VTD"> <p>Description  <br><br> <span id="description">-</span></p></div>
+      </div>
+    </div>
+
+    <div class="weather-info">
+      <h2>Prochaine météo</h2>
+     <div class="weather-cards" id="forecastCards"></div>
+
+    </div>
+  </main>
+  <footer>
+  
+  
+
+<div class="social-links">
+   <img  style="width: 50px;margin-right: 20px;" src="img/logo_ht.png" alt="">
+   <div>
+    <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="#" target="_blank"><i class="fab fa-tiktok"></i></a>
+    <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+    <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+    <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
+  </div>
+</div>
+
+</footer>
+
+
+  <!-- ✅ استدعاء ملف JavaScript من الخارج -->
+  <script src="script.js" defer></script>
+</body>
+</html>
