@@ -14,7 +14,6 @@ document.getElementById("searchBtn").addEventListener("click", () => {
     .then(geoData => {
       if (geoData.length === 0) throw new Error("Ville non trouvée !");
       const { lat, lon, name } = geoData[0];
-      
 
       // 🔹 Étape 2 : Afficher la météo actuelle
       fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=fr`)
@@ -23,9 +22,12 @@ document.getElementById("searchBtn").addEventListener("click", () => {
           document.getElementById("cityName").textContent = name;
           document.getElementById("temperature").textContent = data.main.temp.toFixed(1);
           document.getElementById("description").textContent = data.weather[0].description;
+          const iconCode = data.weather[0].icon;
+          document.getElementById("weatherIcon").src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
 
-          // ✅ 🔄 Changer l'image de fond selon la météo
-          const meteo = data.weather[0].main.toLowerCase(); // exemple : "clear", "clouds", "rain", etc.
+
+          // 🔄 Changer l'image de fond
+          const meteo = data.weather[0].main.toLowerCase();
           let imageUrl = "img/default.avif";
 
           if (meteo.includes("clear")) {
@@ -47,6 +49,7 @@ document.getElementById("searchBtn").addEventListener("click", () => {
       fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${apiKey}`)
         .then(res => res.json())
         .then(data => {
+          // --- 5 jours ---
           const forecastCards = document.getElementById("forecastCards");
           forecastCards.innerHTML = "";
 
@@ -54,7 +57,7 @@ document.getElementById("searchBtn").addEventListener("click", () => {
 
           data.list.forEach(entry => {
             const date = new Date(entry.dt * 1000);
-            const dateStr = date.toDateString(); // Unique par jour
+            const dateStr = date.toDateString();
 
             if (!joursAjoutes.has(dateStr)) {
               const jour = date.toLocaleDateString("fr-FR", {
@@ -84,9 +87,53 @@ document.getElementById("searchBtn").addEventListener("click", () => {
           if (forecastCards.children.length === 0) {
             forecastCards.innerHTML = "<p>Aucune prévision trouvée.</p>";
           }
+
+          // --- 3 heures ---
+          const forecast3h = document.getElementById("forecast3h");
+          forecast3h.innerHTML = "";
+
+          data.list.slice(0, 6).forEach(entry => {
+            const heure = new Date(entry.dt * 1000).toLocaleTimeString("fr-FR", {
+              hour: "2-digit",
+              minute: "2-digit"
+            });
+
+            const icon = entry.weather[0].icon;
+            const description = entry.weather[0].description;
+            const temp = entry.main.temp.toFixed(1);
+
+            const card = document.createElement("div");
+            card.className = "hour-card";
+            card.innerHTML = `
+              <strong>${heure}</strong>
+              <img src="https://openweathermap.org/img/wn/${icon}@2x.png" alt="${description}">
+              <p>${temp} °C</p>
+              <small>${description}</small>
+            `;
+            forecast3h.appendChild(card);
+          });
         });
     })
     .catch(error => {
       alert("Erreur : " + error.message);
     });
 });
+
+
+
+
+
+
+  const btn = document.getElementById("toggleMode");
+
+  btn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+
+    if (document.body.classList.contains("dark-mode")) {
+      btn.textContent = "☀️ Mode clair";
+    } else {
+      btn.textContent = "🌙 Mode sombre";
+    }
+  });
+
+

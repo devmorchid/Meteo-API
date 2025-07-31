@@ -159,6 +159,15 @@ footer {
   display: flex;
   justify-content: space-around;
 }
+.dv_3heurs{
+  background-color: #f1f7fe;
+  justify-content: center;
+  border-radius: 10px;
+  font-style: italic;
+  font-weight: bold;
+  text-align: center;
+  
+}
 .dv_VTD{
   background-color: #f1f7fe;
   padding: 40px;
@@ -208,4 +217,63 @@ footer {
 .social-links a:hover {
   transform: scale(1.2);
   color: #555; /* gris foncé au survol */
+}
+
+
+.forecast-3h {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 بطاقات في كل سطر */
+  gap: 15px;
+  margin-top: 20px;
+  
+}
+
+
+.weather-card, .hour-card {
+  background-color: rgba(255,255,255,0.8);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  width: 120px;
+}
+
+#weatherIcon {
+  width: 80px;
+  height: 80px;
+  margin-top: 10px;
+}
+
+
+.dark-mode {
+  --color-bg: #121212;
+  --color-card: #1e1e1e;
+  --color-text: #f0f0f0;
+  --color-muted: #bbb;
+  background-image: none !important; /* تعطيل صورة الخلفية إن أردت */
+}
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+.dark-mode .dv_VTD {
+  background-color: #2a2a2a;  /* لون غامق مناسب */
+  color: #ddd;                /* نص فاتح */
+  font-style: italic;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark-mode .dv_VTD:hover {
+  background-color: #3c3c3c;
+}
+
+.dark-mode .dv_VTD i {
+  color: #ccc;
+}
+
+@media (max-width: 600px) {
+  .forecast-3h {
+    grid-template-columns: repeat(2, 1fr); /* فقط 2 في الهاتف */
+  }
 }

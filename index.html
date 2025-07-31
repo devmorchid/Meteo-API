@@ -16,6 +16,8 @@
     
     <img  style="width: 50px;" src="img/logo_ht.png" alt="">
     <h1> HitRadio - Météo en direct</h1>
+    <button id="toggleMode">🌙 Mode sombre</button>
+
     
   </header>
   </div>
@@ -25,15 +27,26 @@
       <button id="searchBtn">Rechercher</button>
     </div>
 
+
     <div class="weather-info" id="currentWeather">
       <h2>Météo actuelle</h2>
       <div class="dv_actuelle">
-        <div class="dv_VTD"><p >Ville <br><br>  <span id="cityName">-</span></p></div>
-        <div class="dv_VTD"><p>Température <br> <br>  <span id="temperature">-</span> °C</p></div>
-        <div class="dv_VTD"> <p>Description  <br><br> <span id="description">-</span></p></div>
+        <div class="dv_VTD"><p > <i style="text-align: center;" class="fas fa-city"></i> <br><br> <br>Ville <br><br>  <span id="cityName">-</span></p></div>
+        <div class="dv_VTD"> <img id="weatherIcon" alt=""><p>Température <br> <br>  <span id="temperature">-</span> °C</p></div>
+        <div class="dv_VTD"> <p> <i class="fas fa-cloud-sun"></i> <br><br><br>Description  <br><br> <span id="description">-</span></p></div>
       </div>
     </div>
-
+    <!--class="forecast-3h"-->
+    <div style="text-align: center; margin-left: 10px;padding: 30px;" class="dv_3heurs"> 
+    <h2>Prévisions toutes les 3 heures</h2>
+    <div class="dv_actuelle">
+      <div class="forecast-3h" id="forecast3h"  ></div>
+      
+      </div>
+    </div>
+    
+  
+    <br><br>
     <div class="weather-info">
       <h2>Prochaine météo</h2>
      <div class="weather-cards" id="forecastCards"></div>
