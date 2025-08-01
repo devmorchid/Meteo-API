@@ -154,3 +154,126 @@ document.getElementById("unitSwitch").addEventListener("change", function () {
   updateForecastCards();
   updateForecast3h();
 });
+
+
+// متغيرات لمخازن بيانات الرسومات
+let chart3h = null;
+let chart5d = null;
+
+function createChart3h() {
+  const ctx3h = document.getElementById("tempChart3h").getContext("2d");
+
+  // بيانات الساعات (6 نقاط)
+  const heures = [];
+  const temperatures = [];
+
+  forecastData.slice(0, 6).forEach(entry => {
+    const heure = new Date(entry.dt * 1000).toLocaleTimeString("fr-FR", {
+      hour: "2-digit",
+      minute: "2-digit"
+    });
+
+    let temp = entry.main.temp;
+    temp = isFahrenheit ? (temp * 9) / 5 + 32 : temp;
+
+    heures.push(heure);
+    temperatures.push(temp.toFixed(1));
+  });
+
+  if (chart3h) chart3h.destroy();
+
+  chart3h = new Chart(ctx3h, {
+    type: "line",
+    data: {
+      labels: heures,
+      datasets: [{
+        label: `Température (3h) (${isFahrenheit ? "°F" : "°C"})`,
+        data: temperatures,
+        backgroundColor: "rgba(230,0,0,0.2)",
+        borderColor: "#e60000",
+        borderWidth: 2,
+        fill: true,
+        tension: 0.3,
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { beginAtZero: false }
+      }
+    }
+  });
+}
+
+function createChart5d() {
+  const ctx5d = document.getElementById("tempChart5d").getContext("2d");
+
+  // مجموعة لتخزين الأيام المضافة
+  const jours = [];
+  const tempJour = [];
+
+  // نجمع أول نقطة لكل يوم من 5 أيام
+  for (let i = 0; i < forecastData.length && jours.length < 5; i++) {
+    const entry = forecastData[i];
+    const date = new Date(entry.dt * 1000);
+    const dateStr = date.toLocaleDateString("fr-FR", { weekday: "short", day: "numeric", month: "short" });
+
+    if (!jours.includes(dateStr)) {
+      jours.push(dateStr);
+      let temp = entry.main.temp;
+      temp = isFahrenheit ? (temp * 9) / 5 + 32 : temp;
+      tempJour.push(temp.toFixed(1));
+    }
+  }
+
+  if (chart5d) chart5d.destroy();
+
+  chart5d = new Chart(ctx5d, {
+    type: "line",
+    data: {
+      labels: jours,
+      datasets: [{
+        label: `Température (5 jours) (${isFahrenheit ? "°F" : "°C"})`,
+        data: tempJour,
+        backgroundColor: "rgba(0, 102, 204, 0.2)",
+        borderColor: "#0066cc",
+        borderWidth: 2,
+        fill: true,
+        tension: 0.3,
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { beginAtZero: false }
+      }
+    }
+  });
+}
+
+// استدعاء التحديث للرسومات مع تحديث البيانات
+function updateCharts() {
+  createChart3h();
+  createChart5d();
+}
+
+// تحديث بعد تحميل البيانات
+function getForecastData(lat, lon) {
+  fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${apiKey}`)
+    .then(res => res.json())
+    .then(data => {
+      forecastData = data.list;
+      updateForecastCards();
+      updateForecast3h();
+      updateCharts();  // أضف هذا السطر لتحديث الرسومات
+    });
+}
+
+// تحديث عند تغيير الوحدة (°C / °F)
+document.getElementById("unitSwitch").addEventListener("change", function () {
+  isFahrenheit = this.checked;
+  updateCurrentTemp();
+  updateForecastCards();
+  updateForecast3h();
+  updateCharts();  // أضف هذا السطر لتحديث الرسومات عند تبديل الوحدة
+});

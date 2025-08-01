@@ -104,7 +104,7 @@
   <label class="switch">
 
 </div>
-<div style="">
+<div >
    <div class="toggle-wrapper">
   <label class="toggle-container">
     <input type="checkbox" id="unitSwitch" class="toggle-checkbox">
@@ -123,7 +123,7 @@
       <h2>Météo actuelle</h2>
       <div class="dv_actuelle">
         <div class="dv_VTD"><p > <i style="text-align: center;" class="fas fa-city"></i> <br><br> <br>Ville <br><br>  <span id="cityName">-</span></p></div>
-        <div class="dv_VTD"> <img id="weatherIcon" alt=""><p>Température <br> <br>  <span id="temperature">-</span> °C</p></div>
+        <div class="dv_VTD"> <img id="weatherIcon" alt=""><p>Température <br> <br>  <span id="temperature">-</span></p></div>
         <div class="dv_VTD"> <p> <i class="fas fa-cloud-sun"></i> <br><br><br>Description  <br><br> <span id="description">-</span></p></div>
       </div>
     </div>
@@ -133,16 +133,26 @@
     <div class="dv_actuelle">
       <div class="forecast-3h" id="forecast3h"  ></div>
       
+      
+      
       </div>
+       <canvas id="tempChart3h" width="400" height="200"></canvas>
     </div>
+
+
+
+
     
   
     <br><br>
     <div class="weather-info">
       <h2>Prochaine météo</h2>
      <div class="weather-cards" id="forecastCards"></div>
-
+       <canvas id="tempChart5d" width="400" height="200"></canvas>
     </div>
+
+   
+
   </main>
   <footer>
   
@@ -164,6 +174,8 @@
 
 
   <!-- ✅ استدعاء ملف JavaScript من الخارج -->
+   <script src="/chart.js"></script>
+
   <script src="script.js" defer></script>
 </body>
 </html>
