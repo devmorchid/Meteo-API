@@ -217,13 +217,13 @@ footer {
 
 .social-links a:hover {
   transform: scale(1.2);
-  color: #555; /* gris foncé au survol */
+  color: #555; 
 }
 
 
 .forecast-3h {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 بطاقات في كل سطر */
+  grid-template-columns: repeat(3, 1fr); 
   gap: 15px;
   margin-top: 20px;
   
@@ -250,7 +250,7 @@ footer {
   --color-card: #1e1e1e;
   --color-text: #f0f0f0;
   --color-muted: #bbb;
-  background-image: none !important; /* تعطيل صورة الخلفية إن أردت */
+  background-image: none !important; 
 }
 body {
   background-color: var(--color-bg);
@@ -258,8 +258,8 @@ body {
 }
 
 .dark-mode .dv_VTD  {
-  background-color: #2a2a2a;  /* لون غامق مناسب */
-  color: #ddd;                /* نص فاتح */
+  background-color: #2a2a2a;  
+  color: #ddd;                
   font-style: italic;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -277,7 +277,7 @@ body {
 
 @media (max-width: 600px) {
   .forecast-3h {
-    grid-template-columns: repeat(2, 1fr); /* فقط 2 في الهاتف */
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
 
@@ -340,7 +340,7 @@ body {
 }
 
 
-/* الوضع الطبيعي */
+
 .weather-card, .hour-card {
   background-color: rgba(255,255,255,0.8);
   color: #222;
@@ -351,12 +351,11 @@ body {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* الوضع الليلي (dark mode) */
+
 body.dark-mode .dv_3heurs,
 body.dark-mode .weather-card,
 body.dark-mode .hour-card {
-  background-color: #1e1e1e;  /* خلفية داكنة فقط للكروت */
-  color: #eee;                /* نص فاتح */
-  border: 1px solid #444;     /* إطار داكن خفيف */
+  background-color: #1e1e1e;  
+  color: #eee;                
+  border: 1px solid #444;    
 }
-

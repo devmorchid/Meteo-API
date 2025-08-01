@@ -156,14 +156,14 @@ document.getElementById("unitSwitch").addEventListener("change", function () {
 });
 
 
-// متغيرات لمخازن بيانات الرسومات
+
 let chart3h = null;
 let chart5d = null;
 
 function createChart3h() {
   const ctx3h = document.getElementById("tempChart3h").getContext("2d");
 
-  // بيانات الساعات (6 نقاط)
+ 
   const heures = [];
   const temperatures = [];
 
@@ -208,11 +208,10 @@ function createChart3h() {
 function createChart5d() {
   const ctx5d = document.getElementById("tempChart5d").getContext("2d");
 
-  // مجموعة لتخزين الأيام المضافة
+ 
   const jours = [];
   const tempJour = [];
 
-  // نجمع أول نقطة لكل يوم من 5 أيام
   for (let i = 0; i < forecastData.length && jours.length < 5; i++) {
     const entry = forecastData[i];
     const date = new Date(entry.dt * 1000);
@@ -251,13 +250,13 @@ function createChart5d() {
   });
 }
 
-// استدعاء التحديث للرسومات مع تحديث البيانات
+
 function updateCharts() {
   createChart3h();
   createChart5d();
 }
 
-// تحديث بعد تحميل البيانات
+
 function getForecastData(lat, lon) {
   fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&lang=fr&appid=${apiKey}`)
     .then(res => res.json())
@@ -265,15 +264,15 @@ function getForecastData(lat, lon) {
       forecastData = data.list;
       updateForecastCards();
       updateForecast3h();
-      updateCharts();  // أضف هذا السطر لتحديث الرسومات
+      updateCharts();  
     });
 }
 
-// تحديث عند تغيير الوحدة (°C / °F)
+
 document.getElementById("unitSwitch").addEventListener("change", function () {
   isFahrenheit = this.checked;
   updateCurrentTemp();
   updateForecastCards();
   updateForecast3h();
-  updateCharts();  // أضف هذا السطر لتحديث الرسومات عند تبديل الوحدة
+  updateCharts();  
 });
