@@ -25,6 +25,7 @@ header {
   display: flex;
   text-align: center;
   justify-content: center;
+  justify-items: center;
   
 }
 
@@ -256,13 +257,15 @@ body {
   color: var(--color-text);
 }
 
-.dark-mode .dv_VTD {
+.dark-mode .dv_VTD  {
   background-color: #2a2a2a;  /* لون غامق مناسب */
   color: #ddd;                /* نص فاتح */
   font-style: italic;
   font-weight: bold;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+
 
 .dark-mode .dv_VTD:hover {
   background-color: #3c3c3c;
@@ -277,3 +280,83 @@ body {
     grid-template-columns: repeat(2, 1fr); /* فقط 2 في الهاتف */
   }
 }
+
+
+
+.toggle-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+}
+
+.toggle-container {
+  position: relative;
+  display: inline-block;
+  width: 70px;
+  height: 34px;
+  margin-right: 10px;
+}
+
+.toggle-checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+  font-family: sans-serif;
+  font-size: 14px;
+  color: white;
+  text-align: center;
+  line-height: 34px;
+}
+
+.toggle-slider::before {
+  position: absolute;
+  content: "°C";
+  height: 34px;
+  width: 70px;
+  left: 0;
+  top: 0;
+  transition: 0.4s;
+}
+
+.toggle-checkbox:checked + .toggle-slider::before {
+  content: "°F";
+}
+
+.toggle-checkbox:checked + .toggle-slider {
+  background-color: #2196F3;
+}
+
+
+/* الوضع الطبيعي */
+.weather-card, .hour-card {
+  background-color: rgba(255,255,255,0.8);
+  color: #222;
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  width: 120px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* الوضع الليلي (dark mode) */
+body.dark-mode .dv_3heurs,
+body.dark-mode .weather-card,
+body.dark-mode .hour-card {
+  background-color: #1e1e1e;  /* خلفية داكنة فقط للكروت */
+  color: #eee;                /* نص فاتح */
+  border: 1px solid #444;     /* إطار داكن خفيف */
+}
+

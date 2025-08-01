@@ -7,22 +7,113 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  
+    <style>
+    .cl_lbl {
+      position: relative;
+      display: inline-block;
+      width: 70px;
+      height: 30px;
+      font-family: Arial;
+     
+    }
+
+    .cl_lbl input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .cl_spn {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #9bb3e8;
+      transition: 0.4s;
+      border-radius: 34px;
+    }
+
+    .cl_spn::before {
+      position: absolute;
+      content: "";
+      height: 24px;
+      width: 24px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+
+    input:checked + .cl_spn {
+      background-color:#ccc;
+    }
+
+    input:checked + .cl_spn::before {
+      transform: translateX(40px);
+    }
+
+    /* Texte ON / OFF */
+    .cl_spn::after {
+     /*  content: "OFF";*/
+      color: white;
+      font-size: 12px;
+      position: absolute;
+      right: 10px;
+      top: 6px;
+    }
+
+    input:checked + .cl_spn::after {
+      /* content: "ON";*/
+      left: 10px;
+      right: auto;
+    }
+  </style>
 </head>
 <body>
  
-  <div>
-     <header >
+  <div >
+     <header  >
     
     <img  style="width: 50px;" src="img/logo_ht.png" alt="">
     <h1> HitRadio - Météo en direct</h1>
-    <button id="toggleMode">🌙 Mode sombre</button>
+
+<div style="margin-left: 30%;">
+      <label  class="cl_lbl">
+ <input  type="checkbox" id="toggleMode">
+  <span class="cl_spn"></span>
+  </label>
+ 
+</div>
+
+
+
+
+  
+
 
     
   </header>
   </div>
   <main>
+    
     <div class="search-bar">
+      <div class="unit-switch">
+  <label class="switch">
+
+</div>
+<div style="">
+   <div class="toggle-wrapper">
+  <label class="toggle-container">
+    <input type="checkbox" id="unitSwitch" class="toggle-checkbox">
+    <span class="toggle-slider"></span>
+  </label>
+</div>
+</div>
+
+
       <input type="text" id="cityInput" placeholder="Entrez une ville...">
       <button id="searchBtn">Rechercher</button>
     </div>
@@ -38,7 +129,7 @@
     </div>
     <!--class="forecast-3h"-->
     <div style="text-align: center; margin-left: 10px;padding: 30px;" class="dv_3heurs"> 
-    <h2>Prévisions toutes les 3 heures</h2>
+    <h2 >Prévisions toutes les 3 heures</h2>
     <div class="dv_actuelle">
       <div class="forecast-3h" id="forecast3h"  ></div>
       
